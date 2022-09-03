@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-configurations.create("ktlint")
+val ktlint: Configuration by configurations.creating
 dependencies {
-    val ktlintVersion = "0.43.2"
-    "ktlint"("com.pinterest:ktlint:$ktlintVersion")
+    ktlint("com.pinterest:ktlint:0.47.0")
 }
 
 val ktlintTask = tasks.register<JavaExec>("ktlint") {
     group = "verification"
     description = "Check Kotlin code style"
-    classpath = configurations["ktlint"]
+    classpath = ktlint
     mainClass.set("com.pinterest.ktlint.Main")
 
     val output = buildDir.resolve("ktlint-report.txt")
-    args("src/**/*.kt", "--reporter=plain", "--reporter=plain,output=${output.absolutePath}")
+    args("src/**/*.kt", "**.kts", "--verbose", "--reporter=plain", "--reporter=plain,output=${output.absolutePath}")
 
     inputs.files(fileTree("src") {
         include("**/*.kt")
@@ -43,7 +42,7 @@ tasks.withType<Test>().configureEach {
 tasks.register<JavaExec>("ktlintFormat") {
     group = "formatting"
     description = "Fix Kotlin code style deviations"
-    classpath = configurations["ktlint"]
+    classpath = ktlint
     mainClass.set("com.pinterest.ktlint.Main")
-    args("-F", "src/**/*.kt")
+    args("-F", "src/**/*.kt", "**.kts")
 }
