@@ -122,7 +122,9 @@ class HeroControlButton : GameUIComponent<GameProps, HeroControlButtonState>() {
 
     private fun ChildrenBuilder.renderPieMenu() {
         val center = game.hero!!.pixelCoordinate - canvasCoordinateInMap + canvasCoordinateInGameContainer + tileSize / 2
-        child(PieMenu::class.react, jso {
+        child(
+            PieMenu::class.react,
+            jso {
             centerPoint = center
             zIndex = Layer.HeroControlButton.zIndex()
             items = listOf(
@@ -141,7 +143,8 @@ class HeroControlButton : GameUIComponent<GameProps, HeroControlButtonState>() {
                     showSpeakMenu = false
                 }
             }
-        })
+        }
+        )
 
         if (state.showSpeakMenu) {
             val z = Layer.HeroControlButton.zIndex() + 4

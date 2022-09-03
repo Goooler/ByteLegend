@@ -50,7 +50,9 @@ class DefaultGameMission(
 ) : AbstractStaticLocationSprite(
     gameMapMission.gridCoordinate,
     gameMapMission.gridCoordinate * gameScene.map.tileSize
-), GameMission, HasBouncingTitle {
+),
+GameMission,
+HasBouncingTitle {
     override val id: String = gameMapMission.id
     override val layer: Int = gameMapMission.layer
 
@@ -105,10 +107,13 @@ class DefaultGameMission(
             modalProps.onHide = {
                 game.modalController.hide(id)
             }
-            child(MissionModal::class.react, jso {
+            child(
+                MissionModal::class.react,
+                jso {
                 this.game = game
                 this.missionId = id
-            })
+            }
+            )
         }
     }
 
@@ -123,7 +128,9 @@ class DefaultGameMission(
     override fun renderBouncingTitle(builder: ChildrenBuilder) {
         val scene = gameScene
         val missionCoordinate = pixelCoordinate
-        builder.child(MissionTitle::class.react, jso {
+        builder.child(
+            MissionTitle::class.react,
+            jso {
             backgroundColor = "rgba(0,0,0,0.7)"
             color = "white"
             gameScene = scene
@@ -134,6 +141,7 @@ class DefaultGameMission(
             onClickFunction = {
                 this@DefaultGameMission.onClick()
             }
-        })
+        }
+        )
     }
 }

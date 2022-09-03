@@ -124,10 +124,13 @@ fun <PARENT : GameProps, CHILD : GameProps> gameChild(
     block: CHILD.() -> Unit = {}
 ) {
     val newChild = Fragment.create {
-        child(klazz, jso {
+        child(
+            klazz,
+            jso {
             this.game = props.game
             block()
-        })
+        }
+        )
     }
     if (props.children == null) {
         props.children = arrayOf(newChild).asDynamic()

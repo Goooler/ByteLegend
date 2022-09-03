@@ -120,15 +120,21 @@ class CreditsModal : GameUIComponent<GameProps, CreditsModalState>() {
     }
 
     private fun ChildrenBuilder.openSourceTab() {
-        child(OpenSourceSoftwareTable::class.react, jso {
+        child(
+            OpenSourceSoftwareTable::class.react,
+            jso {
             this.game = props.game
-        })
+        }
+        )
     }
 
     private fun ChildrenBuilder.materialTab() {
-        child(GameMaterialTable::class.react, jso {
+        child(
+            GameMaterialTable::class.react,
+            jso {
             this.game = props.game
-        })
+        }
+        )
     }
 
     override fun render() = Fragment.create {

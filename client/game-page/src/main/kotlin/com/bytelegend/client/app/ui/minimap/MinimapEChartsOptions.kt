@@ -165,10 +165,12 @@ fun GameScene.getMinimapMapSeries() {
     )
     val regions: List<GameMapRegion> = objects.getByRole(GameObjectRole.MapRegion)
     regions.forEachIndexed { index, region ->
-        mapSeries.data.push(jso {
+        mapSeries.data.push(
+            jso {
             name = region.id
             value = index % mapAreaColorNumber
-        })
+        }
+        )
     }
     return mapSeries
 }
@@ -200,11 +202,13 @@ fun GameScene.getRoadmapMapSeries() {
         val regionLabel: dynamic = jso {
             formatter = gameRuntime.i("${region.id}Name")
         }
-        mapSeries.data.push(jso {
+        mapSeries.data.push(
+            jso {
             name = region.id
             value = index % mapAreaColorNumber
             label = regionLabel
-        })
+        }
+        )
     }
     return mapSeries
 }
@@ -355,7 +359,8 @@ fun GameScene.getRoadmapMissionGraphSeries(showMissionTitles: Boolean): dynamic 
             gameRuntime.i(mission.gameMapMission.title)
         )
 
-        nodes.push(jso {
+        nodes.push(
+            jso {
             id = mission.id
             // To avoid the label out of left border
             x = if (coordinate.x < 120) 120 else coordinate.x
@@ -366,13 +371,16 @@ fun GameScene.getRoadmapMissionGraphSeries(showMissionTitles: Boolean): dynamic 
             label = labelOptions
             itemStyle = ITEM_STYLE
             this.symbolSize = 10
-        })
+        }
+        )
 
         mission.gameMapMission.next.forEach {
-            edges.push(jso {
+            edges.push(
+                jso {
                 source = mission.id
                 target = it
-            })
+            }
+            )
         }
     }
     addCornerPlaceHoldersToNodes(nodes, map.pixelSize.width, map.pixelSize.height)
@@ -396,7 +404,8 @@ private fun GameScene.addRealworldProjectsToNodes(showMissionTitles: Boolean, no
             gameRuntime.i(it)
         )
 
-        nodes.push(jso {
+        nodes.push(
+            jso {
             id = it
             // To avoid the label out of left border
             x = coordinate.x
@@ -407,19 +416,22 @@ private fun GameScene.addRealworldProjectsToNodes(showMissionTitles: Boolean, no
             label = labelOptions
             itemStyle = ITEM_STYLE
             this.symbolSize = 20
-        })
+        }
+        )
     }
 }
 
 private fun GameScene.addJavaCastleToNodes(nodes: dynamic, tileWidth: Int, tileHeight: Int, logoSize: Int) {
     val obj = objects.getByIdOrNull<GameObject>(JAVA_CASTLE_REGION_CENTER) ?: return
     val gridCoordinate = obj.unsafeCast<GridCoordinateAware>().gridCoordinate
-    nodes.push(jso {
+    nodes.push(
+        jso {
         x = gridCoordinate.x * tileWidth
         y = gridCoordinate.y * tileHeight
         symbol = JAVA_LOGO_IMAGE
         symbolSize = logoSize
-    })
+    }
+    )
 }
 
 private fun addCornerPlaceHoldersToNodes(nodes: dynamic, mapWidth: Int, mapHeight: Int) {
@@ -437,20 +449,24 @@ fun GameScene.getMinimapRegionConnectionGraphSeries() {
     val nodes: dynamic = js("[]")
     val edges: dynamic = js("[]")
     regions.forEach { region ->
-        nodes.push(jso {
+        nodes.push(
+            jso {
             id = region.id
             x = region.center.x
             y = region.center.y
             value = 0
             category = 0
             symbolSize = 0
-        })
+        }
+        )
 
         region.next.forEach { nextId ->
-            edges.push(jso {
+            edges.push(
+                jso {
                 source = region.id
                 target = nextId
-            })
+            }
+            )
         }
     }
 

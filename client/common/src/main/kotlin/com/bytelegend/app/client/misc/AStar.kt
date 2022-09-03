@@ -52,7 +52,11 @@ fun search(
     wallPredicate: (Int) -> Boolean
 ): List<GridCoordinate> {
     val array: Array<dynamic> = window.asDynamic().astar.search(
-        mapArray, start.x, start.y, end.x, end.y,
+        mapArray,
+        start.x,
+        start.y,
+        end.x,
+        end.y,
         jso {
             this.wallPredicate = wallPredicate
         }

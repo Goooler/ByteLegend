@@ -79,33 +79,53 @@ fun showConfetti(canvasState: GameCanvasState, originPointOnMap: GridCoordinate)
     playAudio("tada")
 
     // https://www.kirilv.com/canvas-confetti/#realistic
-    fire(0.25, origin, jso {
+    fire(
+        0.25,
+        origin,
+        jso {
         this.angle = angle
         spread = 26
         startVelocity = 55
-    })
-    fire(0.2, origin, jso {
+    }
+    )
+    fire(
+        0.2,
+        origin,
+        jso {
         this.angle = angle
         spread = 60
-    })
-    fire(0.35, origin, jso {
+    }
+    )
+    fire(
+        0.35,
+        origin,
+        jso {
         this.angle = angle
         spread = 100
         decay = 0.91
         scalar = 0.8
-    })
-    fire(0.1, origin, jso {
+    }
+    )
+    fire(
+        0.1,
+        origin,
+        jso {
         this.angle = angle
         spread = 120
         startVelocity = 25
         decay = 0.92
         scalar = 1.2
-    })
-    fire(0.1, origin, jso {
+    }
+    )
+    fire(
+        0.1,
+        origin,
+        jso {
         this.angle = angle
         spread = 120
         startVelocity = 45
-    })
+    }
+    )
 }
 
 suspend fun fadeInEffect(gameContainerSize: PixelSize): Unit = suspendCoroutine { continuation ->
@@ -237,24 +257,33 @@ suspend fun showAchievementEffect(
     val center = PixelCoordinate(canvasState.gameContainerSize.width / 2, canvasState.gameContainerSize.height / 2)
 
     val timeline = gsap.timeline()
-    timeline.to("#$imgId", jso {
+    timeline.to(
+        "#$imgId",
+        jso {
         x = center.x
         y = center.y
         duration = 0
-    })
+    }
+    )
 
-    timeline.to("#$imgId", jso {
+    timeline.to(
+        "#$imgId",
+        jso {
         x = center.x
         y = center.y
         duration = 1
         scale = 5
-    })
-    timeline.to("#$imgId", jso {
+    }
+    )
+    timeline.to(
+        "#$imgId",
+        jso {
         x = center.x
         y = center.y
         duration = 1
         scale = 3
-    })
+    }
+    )
 
     delay(3000)
     document.body?.removeChild(opaqueBackground)

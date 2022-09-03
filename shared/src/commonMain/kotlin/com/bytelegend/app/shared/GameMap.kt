@@ -139,7 +139,8 @@ fun MutableMap<Any, Int>.recordRawConstantPoolEntries(vararg entries: Any) = ent
     get(it) ?: put(it, this.size + 1)
 }
 
-fun <T> List<T>.mapToConstantPoolIndex(rawConstantPool: Map<Any, Int>): List<Int> = map { rawConstantPool.getValue(it as Any) }
+fun <T> List<T>.mapToConstantPoolIndex(rawConstantPool: Map<Any, Int>): List<Int> =
+    map { rawConstantPool.getValue(it as Any) }
 
 @Serializable
 data class RawGameMapTile(
@@ -151,7 +152,10 @@ data class RawGameMapTile(
         layers.forEach { it.addToRawConstantPool(rawConstantPool) }
     }
 
-    override fun addToFinalConstantPool(rawConstantPool: Map<Any, Int>, finalConstantPool: LinkedHashSet<ConstantPoolEntry>) {
+    override fun addToFinalConstantPool(
+        rawConstantPool: Map<Any, Int>,
+        finalConstantPool: LinkedHashSet<ConstantPoolEntry>
+    ) {
         finalConstantPool.add(GameTileConstantPoolEntry(layers.mapToConstantPoolIndex(rawConstantPool), blocker))
         layers.forEach { it.addToFinalConstantPool(rawConstantPool, finalConstantPool) }
     }
@@ -179,7 +183,10 @@ data class RawStaticImageLayer(
         rawConstantPool.recordRawConstantPoolEntries(coordinate)
     }
 
-    override fun addToFinalConstantPool(rawConstantPool: Map<Any, Int>, finalConstantPool: LinkedHashSet<ConstantPoolEntry>) {
+    override fun addToFinalConstantPool(
+        rawConstantPool: Map<Any, Int>,
+        finalConstantPool: LinkedHashSet<ConstantPoolEntry>
+    ) {
         finalConstantPool.add(StaticImageLayerEntry(rawConstantPool.getValue(coordinate), layer))
         finalConstantPool.add(CoordinateConstantPoolEntry(coordinate))
     }
@@ -195,7 +202,10 @@ data class RawAnimationLayer(
         frames.forEach { rawConstantPool.recordRawConstantPoolEntries(it) }
     }
 
-    override fun addToFinalConstantPool(rawConstantPool: Map<Any, Int>, finalConstantPool: LinkedHashSet<ConstantPoolEntry>) {
+    override fun addToFinalConstantPool(
+        rawConstantPool: Map<Any, Int>,
+        finalConstantPool: LinkedHashSet<ConstantPoolEntry>
+    ) {
         finalConstantPool.add(AnimationLayerEntry(frames.mapToConstantPoolIndex(rawConstantPool), layer))
         frames.forEach { finalConstantPool.add(AnimationFrameEntry(it)) }
     }
@@ -236,8 +246,11 @@ data class CompressedGameMap(
     }
 }
 
-object ConstantPoolEntryListSerializer : JsonTransformingSerializer<List<ConstantPoolEntry>>(ListSerializer(ConstantPoolEntrySerializer))
-object CompressedGameMapObjectListSerializer : JsonTransformingSerializer<List<CompressedGameMapObject>>(ListSerializer(CompressedGameMapObjectSerializer))
+object ConstantPoolEntryListSerializer :
+    JsonTransformingSerializer<List<ConstantPoolEntry>>(ListSerializer(ConstantPoolEntrySerializer))
+
+object CompressedGameMapObjectListSerializer :
+    JsonTransformingSerializer<List<CompressedGameMapObject>>(ListSerializer(CompressedGameMapObjectSerializer))
 
 @Suppress("UNCHECKED_CAST")
 enum class ConstantPoolType(
@@ -280,7 +293,8 @@ enum class ConstantPoolType(
 }
 
 // https://kotlin.github.io/kotlinx.serialization/kotlinx-serialization-json/kotlinx-serialization-json/kotlinx.serialization.json/-json-content-polymorphic-serializer/index.html
-object CompressedGameMapObjectSerializer : JsonContentPolymorphicSerializer<CompressedGameMapObject>(CompressedGameMapObject::class) {
+object CompressedGameMapObjectSerializer :
+    JsonContentPolymorphicSerializer<CompressedGameMapObject>(CompressedGameMapObject::class) {
     override fun selectDeserializer(element: JsonElement): DeserializationStrategy<out CompressedGameMapObject> {
         return when (GameMapObjectType.fromIndex(element.jsonObject["type"].toString().toInt())) {
             GameMapText -> CompressedGameMapText.serializer()
@@ -355,7 +369,8 @@ data class GameTileConstantPoolEntry(
     }
 }
 
-class IndexedConstantPoolEntryWrapper(private val index: Int, private val delegate: ConstantPoolEntry) : ConstantPoolEntry by delegate {
+class IndexedConstantPoolEntryWrapper(private val index: Int, private val delegate: ConstantPoolEntry) :
+    ConstantPoolEntry by delegate {
     override fun getIndex() = index
 }
 
@@ -380,7 +395,10 @@ data class StaticImageLayerEntry(
         get() = listOf(coordinate, layer)
 
     override fun <T> decompress(constantPoolTable: Map<Int, ConstantPoolEntry>): T {
-        return RawStaticImageLayer(constantPoolTable.getValue(coordinate).decompress(constantPoolTable) as GridCoordinate, layer) as T
+        return RawStaticImageLayer(
+            constantPoolTable.getValue(coordinate).decompress(constantPoolTable) as GridCoordinate,
+            layer
+        ) as T
     }
 }
 
@@ -394,7 +412,8 @@ data class AnimationLayerEntry(
         get() = frames + layer
 
     override fun <T> decompress(constantPoolTable: Map<Int, ConstantPoolEntry>): T {
-        val frames = frames.map { constantPoolTable.getValue(it).decompress(constantPoolTable) as RawTileAnimationFrame }
+        val frames =
+            frames.map { constantPoolTable.getValue(it).decompress(constantPoolTable) as RawTileAnimationFrame }
         return RawAnimationLayer(frames, layer) as T
     }
 }

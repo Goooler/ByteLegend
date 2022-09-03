@@ -148,7 +148,9 @@ class Menu : GameUIComponent<MenuProps, State>() {
             zIndex = Layer.Menu.zIndex(),
         ) {
             items.forEachIndexed { index, item ->
-                child(MenuItem::class.react, jso {
+                child(
+                    MenuItem::class.react,
+                    jso {
                     this.game = props.game
                     this.index = index
                     iconImageId = item.iconImageId
@@ -156,16 +158,20 @@ class Menu : GameUIComponent<MenuProps, State>() {
                     onClickFunction = {
                         item.onClickFunction()
                     }
-                })
+                }
+                )
             }
         }
     }
 
     private fun onClickCreditsMenu() {
         game.modalController.show {
-            child(CreditsModal::class.react, jso {
+            child(
+                CreditsModal::class.react,
+                jso {
                 this.game = props.game
-            })
+            }
+            )
         }
     }
 
@@ -182,9 +188,12 @@ class Menu : GameUIComponent<MenuProps, State>() {
                 }
             }
             BootstrapModalBody {
-                child(LeaderboardTable::class.react, jso {
+                child(
+                    LeaderboardTable::class.react,
+                    jso {
                     this.game = props.game
-                })
+                }
+                )
             }
         }
     }

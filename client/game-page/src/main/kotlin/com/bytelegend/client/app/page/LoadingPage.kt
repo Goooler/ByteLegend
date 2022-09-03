@@ -105,10 +105,13 @@ class LoadingPage(props: LoadingPageProps) : Component<LoadingPageProps, Loading
                     width = "80vw"
                     height = "10vh"
                 }
-                child(ProgressBar::class.react, jso {
+                child(
+                    ProgressBar::class.react,
+                    jso {
                     this.game = props.game
                     eventBus = props.eventBus
-                })
+                }
+                )
             }
         }
 

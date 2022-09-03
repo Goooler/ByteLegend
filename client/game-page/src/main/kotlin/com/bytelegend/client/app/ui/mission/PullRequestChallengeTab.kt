@@ -42,11 +42,14 @@ class PullRequestChallengeTab : GameUIComponent<PullRequestChallengeTabProps, St
             br { }
         }
 
-        child(WebEditor::class.react, jso {
+        child(
+            WebEditor::class.react,
+            jso {
             whitelist = props.whitelist
             game = props.game
             missionModalData = props.missionModalData
             challengeSpec = props.challengeSpec
-        })
+        }
+        )
     }
 }

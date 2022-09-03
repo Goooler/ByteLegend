@@ -76,9 +76,12 @@ class RoadmapSvgGenerator(
         require(curvePoints.size > 2)
         g.color = Color.WHITE
         g.stroke = BasicStroke(
-            8.0f, BasicStroke.CAP_BUTT,
+            8.0f,
+        BasicStroke.CAP_BUTT,
             BasicStroke.JOIN_MITER,
-            20.0f, arrayOf(20.0f).toFloatArray(), 0.0f
+            20.0f,
+        arrayOf(20.0f).toFloatArray(),
+        0.0f
         )
         val path = GeneralPath()
 
@@ -95,8 +98,10 @@ class RoadmapSvgGenerator(
             )
         }
         path.quadTo(
-            curvePoints[curvePoints.size - 2].x.toDouble(), curvePoints[curvePoints.size - 2].y.toDouble(),
-            curvePoints[curvePoints.size - 1].x.toDouble(), curvePoints[curvePoints.size - 1].y.toDouble()
+            curvePoints[curvePoints.size - 2].x.toDouble(),
+            curvePoints[curvePoints.size - 2].y.toDouble(),
+            curvePoints[curvePoints.size - 1].x.toDouble(),
+            curvePoints[curvePoints.size - 1].y.toDouble()
         )
         path.closePath()
         g.draw(path) {

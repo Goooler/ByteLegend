@@ -51,15 +51,17 @@ fun main() {
     val outputFrameWidth = System.getProperty("outputFrameWidth")?.toInt() ?: opaqueRegion.width
     val outputFrameHeight = (1.0 * opaqueRegion.height / opaqueRegion.width * outputFrameWidth).toInt()
 
-    val frameGridSize = if (groupType == SpecialMapGroup.Animations)
+    val frameGridSize = if (groupType == SpecialMapGroup.Animations) {
         GridSize(1, 1)
-    else
+    } else {
         GridSize(outputFrameWidth / 32, if (outputFrameHeight % 32 == 0) outputFrameHeight / 32 else (outputFrameHeight / 32 + 1))
+    }
 
-    val tilesetSize = if (groupType == SpecialMapGroup.Animations)
+    val tilesetSize = if (groupType == SpecialMapGroup.Animations) {
         PixelSize(outputFrameWidth * inputImages.size, outputFrameHeight)
-    else
+    } else {
         PixelSize(frameGridSize.width * 32 * inputImages.size, frameGridSize.height * 32)
+    }
 
     val outputImage = BufferedImage(
         tilesetSize.width,
@@ -84,10 +86,12 @@ fun main() {
     val animationTiles = mutableListOf<TiledTileset.Tile>()
     for (x in 0 until frameGridSize.width) {
         for (y in 0 until frameGridSize.height) {
-            animationTiles.add(TiledTileset.Tile().apply {
+            animationTiles.add(
+                TiledTileset.Tile().apply {
                 id = frameGridSize.width * inputImages.size * y + x.toLong()
                 animation = inputImages.indices.map { TiledTileset.Animation(500, id + frameGridSize.width * it) }
-            })
+            }
+            )
         }
     }
 

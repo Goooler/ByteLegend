@@ -69,11 +69,14 @@ class MissionItemButtons(props: GameProps) : GameUIComponent<GameProps, MissionI
             it.id = MISSION_TITLE_BUTTONS_LAYER
             state.items.forEach { item ->
                 if (item.mission?.map == activeScene.map.id) {
-                    child(MissionItemButton::class.react, jso {
+                    child(
+                        MissionItemButton::class.react,
+                        jso {
                         this.game = props.game
                         this.item = item
                         this.mission = activeScene.objects.getById(item.mission.id)
-                    })
+                    }
+                    )
                 }
             }
         }

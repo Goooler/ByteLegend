@@ -741,7 +741,8 @@ fun ScriptsBuilder.talkAboutFirstStar(guardId: String, medalName: String, object
     speech(guardId, "FirstStarMedalCondition", arrayOf(medalName))
     speech(HERO_ID, "WhereToFindStar")
     speech(
-        guardId, "TakeALookAtStarBytelegend",
+        guardId,
+        "TakeALookAtStarBytelegend",
         arrayOf(
             objects.getPointById(STAR_BYTELEGEND_MISSION_ID).toHumanReadableCoordinate().toString()
         )

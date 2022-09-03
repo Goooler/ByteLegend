@@ -77,8 +77,11 @@ class MiniMap : AbstractMapCanvas<MiniMapState>() {
     }
 
     private val collapseProgress: Double
-        get() = if (mapCoveredByCanvas) 0.0
-        else state.collapseProgress
+        get() = if (mapCoveredByCanvas) {
+            0.0
+        } else {
+            state.collapseProgress
+        }
 
     private var lastMouseDownMapCoordinate: PixelCoordinate? = null
     private var lastMouseDownMiniMapCoordinate: PixelCoordinate? = null
@@ -165,7 +168,9 @@ class MiniMap : AbstractMapCanvas<MiniMapState>() {
             }
 
             if (isMaximized()) {
-                child(EChartsMinimap::class.react, jso {
+                child(
+                    EChartsMinimap::class.react,
+                    jso {
                     zIndex = miniMapZIndex + 2
                     width = 200
                     height = 200
@@ -174,7 +179,8 @@ class MiniMap : AbstractMapCanvas<MiniMapState>() {
                     theme = "light"
                     renderer = "svg"
                     this.game = props.game
-                })
+                }
+                )
             }
 
             mapCanvas {
@@ -219,9 +225,12 @@ class MiniMap : AbstractMapCanvas<MiniMapState>() {
                 onClick = {
                     game.modalController.show { modalProps ->
                         modalProps.className = "roadmap-dialog"
-                        child(RoadmapModal::class.react, jso {
+                        child(
+                            RoadmapModal::class.react,
+                            jso {
                             this.game = props.game
-                        })
+                        }
+                        )
                     }
                 }
                 +"↗"
@@ -329,7 +338,8 @@ class MiniMap : AbstractMapCanvas<MiniMapState>() {
             miniMapCoordinate.x.toDouble(),
             miniMapCoordinate.y.toDouble(),
             MINIMAP_AVATAR_SIZE / 2.0,
-            0.0, PI * 2
+            0.0,
+            PI * 2
         )
         canvas.clip()
         canvas.drawImage(

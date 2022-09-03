@@ -72,7 +72,9 @@ fun GameScene.teslaCoilAttackAnimation(startMission: GameMission, endObject: Coo
         }
 
         if (eshock) {
-            animation(attackAnimation, AnimationBuilder().apply {
+            animation(
+                attackAnimation,
+                AnimationBuilder().apply {
                 animationId = "e-shock"
                 frameDurationMs = 100
                 initDelayMs = attackAnimationDuration + 300
@@ -85,7 +87,8 @@ fun GameScene.teslaCoilAttackAnimation(startMission: GameMission, endObject: Coo
                         endPointOnCanvas.x.toDouble(), endPointOnCanvas.y.toDouble(), 48.0, 48.0
                     )
                 }
-            })
+            }
+            )
         } else {
             animation(attackAnimation)
         }
@@ -141,7 +144,8 @@ fun GameScene.silverSwordAttack(missionTower: GameMission) {
         missionTower.animation = Invisible
     }, attackMs)
     scripts("silver-sword-attack-${uuid()}") {
-        animation(AnimationBuilder().apply {
+        animation(
+            AnimationBuilder().apply {
             animationId = "SilverSwordAttack"
             audioId = "GoldSwordAudio"
             frameDurationMs = 250
@@ -154,7 +158,8 @@ fun GameScene.silverSwordAttack(missionTower: GameMission) {
                     missionPointOnCanvas.x.toDouble() - 80, missionPointOnCanvas.y.toDouble() - 96, 192.0, 192.0
                 )
             }
-        })
+        }
+        )
 
         runSuspend {
             refreshTeslaCoilAnimation(missionTower)
@@ -168,7 +173,8 @@ fun GameScene.goldSwordAttack(missionTower: GameMission) {
         missionTower.animation = Invisible
     }, attackMs)
     scripts("gold-sword-attack-${uuid()}") {
-        animation(AnimationBuilder().apply {
+        animation(
+            AnimationBuilder().apply {
             animationId = "GoldSwordAttack"
             audioId = "GoldSwordAudio"
             frameDurationMs = 250
@@ -181,7 +187,8 @@ fun GameScene.goldSwordAttack(missionTower: GameMission) {
                     missionPointOnCanvas.x.toDouble() - 80, missionPointOnCanvas.y.toDouble() - 96, 192.0, 192.0
                 )
             }
-        }, AnimationBuilder().apply {
+        },
+            AnimationBuilder().apply {
             animationId = "TeslaCoilDestroyed"
             audioId = "TeslaCoilExplosion"
             frameDurationMs = 100
@@ -195,7 +202,8 @@ fun GameScene.goldSwordAttack(missionTower: GameMission) {
                     missionPointOnCanvas.x.toDouble() - 16, missionPointOnCanvas.y.toDouble() - 16, 64.0, 80.0
                 )
             }
-        })
+        }
+        )
         runSuspend {
             refreshTeslaCoilAnimation(missionTower)
         }

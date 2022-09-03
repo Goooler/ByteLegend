@@ -99,11 +99,14 @@ class RoadmapModal(props: GameProps) : GameUIComponent<GameProps, RoadmapModalSt
     override fun render() = Fragment.create {
         val roadmapSize = determineRoadmapSize()
 
-        child(ModalCloseButton::class.react, jso {
-            onClickFunction = {
-                game.modalController.hide()
+        child(
+            ModalCloseButton::class.react,
+            jso {
+                onClickFunction = {
+                    game.modalController.hide()
+                }
             }
-        })
+        )
 
         div {
             className = ClassName("show-mission-titles-switch")
@@ -134,7 +137,11 @@ class RoadmapModal(props: GameProps) : GameUIComponent<GameProps, RoadmapModalSt
                     onClick = {
                         if (echarts != undefined) {
                             val oldZoom = state.zoom
-                            setState(jso<RoadmapModalState> { zoom = 1.0 * DEFAULT_DOWNLOAD_ROADMAP_IMAGE_SIZE / mapPixelSize.width }) {
+                            setState(
+                                jso<RoadmapModalState> {
+                                zoom = 1.0 * DEFAULT_DOWNLOAD_ROADMAP_IMAGE_SIZE / mapPixelSize.width
+                            }
+                            ) {
                                 downloadURI(echarts.getDataURL(), "my-roadmap.svg")
                                 setState { zoom = oldZoom }
                             }
@@ -219,9 +226,13 @@ class RoadmapModal(props: GameProps) : GameUIComponent<GameProps, RoadmapModalSt
     private fun initIfNot(refresh: Boolean) {
         if (echarts == undefined) {
             document.getElementById(echartsContainerElementId)?.apply {
-                echarts = window.asDynamic().echarts.init(this, "light", jso {
-                    renderer = "svg"
-                })
+                echarts = window.asDynamic().echarts.init(
+                    this,
+                    "light",
+                    jso {
+                        renderer = "svg"
+                    }
+                )
                 window.asDynamic().echarts.registerMap("minimap", activeScene.getMinimapMapFeatures())
             }
         }
@@ -288,8 +299,10 @@ class RoadmapModal(props: GameProps) : GameUIComponent<GameProps, RoadmapModalSt
         val mapCoordinateUnderCursor = calculateMapCoordinateUnderCursor(state.zoom, modalX.toInt(), modalY.toInt())
         return calculateLeftTopToMakeSureModalPointSameAsMapPoint(
             newZoom,
-            modalX.toInt(), modalY.toInt(),
-            mapCoordinateUnderCursor.x, mapCoordinateUnderCursor.y
+            modalX.toInt(),
+            modalY.toInt(),
+            mapCoordinateUnderCursor.x,
+            mapCoordinateUnderCursor.y
         )
     }
 
@@ -334,12 +347,19 @@ class RoadmapModal(props: GameProps) : GameUIComponent<GameProps, RoadmapModalSt
             setState {
                 mapLeftTop = calculateLeftTopToMakeSureModalPointSameAsMapPoint(
                     state.zoom,
-                    event.offsetX.toInt(), event.offsetY.toInt(),
-                    state.lastMouseDownCoordinateOnMap!!.x, state.lastMouseDownCoordinateOnMap!!.y
+                    event.offsetX.toInt(),
+                    event.offsetY.toInt(),
+                    state.lastMouseDownCoordinateOnMap!!.x,
+                    state.lastMouseDownCoordinateOnMap!!.y
                 )
             }
         } else {
-            document.getElementById(echartsContainerElementId)?.firstChild?.dispatchEvent(MouseEvent("mousemove", event.asDynamic()))
+            document.getElementById(echartsContainerElementId)?.firstChild?.dispatchEvent(
+                MouseEvent(
+                    "mousemove",
+                    event.asDynamic()
+                )
+            )
         }
     }
 
@@ -347,7 +367,8 @@ class RoadmapModal(props: GameProps) : GameUIComponent<GameProps, RoadmapModalSt
         setState {
             cursor = "grabbing"
             lastMouseDownCoordinateOnModal = PixelCoordinate(event.offsetX, event.offsetY)
-            lastMouseDownCoordinateOnMap = calculateMapCoordinateUnderCursor(state.zoom, event.offsetX.toInt(), event.offsetY.toInt())
+            lastMouseDownCoordinateOnMap =
+                calculateMapCoordinateUnderCursor(state.zoom, event.offsetX.toInt(), event.offsetY.toInt())
         }
     }
 

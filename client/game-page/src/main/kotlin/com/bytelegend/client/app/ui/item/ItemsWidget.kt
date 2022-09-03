@@ -33,11 +33,14 @@ class ItemsWidget : GameUIComponent<GameProps, State>() {
             val items = game.heroPlayer.items
             onClick = {
                 game.modalController.show {
-                    child(ItemModal::class.react, jso {
+                    child(
+                        ItemModal::class.react,
+                        jso {
                         this.game = props.game
                         this.title = "MyItems"
                         this.emptyText = "YouDontHaveAnyItems"
-                    })
+                    }
+                    )
                 }
             }
             div {

@@ -110,7 +110,10 @@ fun CanvasRenderingContext2D.drawImage(
     globalAlpha = opacity
     drawImage(
         getImageElement(imageId),
-        dx.toDouble(), dy.toDouble(), dw.toDouble(), dh.toDouble()
+        dx.toDouble(),
+        dy.toDouble(),
+        dw.toDouble(),
+        dh.toDouble()
     )
     restore()
 }

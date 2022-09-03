@@ -96,10 +96,13 @@ class ProgressBar : Component<ProgressBarProps, ProgressBarState>() {
     }
 
     override fun render(): ReactNode {
-        return createElement(BootstrapProgressBar, jso {
+        return createElement(
+            BootstrapProgressBar,
+            jso {
             now = state.now
             variant = ProgressBarVariant.WARNING.name.lowercase()
             animated = true
-        })
+        }
+        )
     }
 }

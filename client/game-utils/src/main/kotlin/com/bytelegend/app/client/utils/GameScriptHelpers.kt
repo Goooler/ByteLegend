@@ -63,7 +63,10 @@ fun GameScene.refreshAnimationForItem(
             sprite.animation = StaticFrame(finishedStateFrameIndex)
         } else {
             val stateChangeAnimation = sprite.mapDynamicSprite.animationWithFixedInterval(
-                animationFrameDurationMs, finishStateChangeAnimationFrameRange.startIndexInclusive, finishStateChangeAnimationFrameRange.endIndexExclusive, false
+                animationFrameDurationMs,
+                finishStateChangeAnimationFrameRange.startIndexInclusive,
+                finishStateChangeAnimationFrameRange.endIndexExclusive,
+                false
             )
             sprite.animation = stateChangeAnimation
             window.setTimeout({

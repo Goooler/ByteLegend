@@ -64,19 +64,21 @@ class PlayerAnimationSetGenerator(
         for (i in 0 until outputFileNumber) {
             val outputFile = outputDir.resolve(playerAnimationSetId(i) + ".png")
 
-            val verticalNumber = if (i == outputFileNumber - 1)
+            val verticalNumber = if (i == outputFileNumber - 1) {
                 capacityDivide((maxId + 1) % (horizontalOutputImageCharacterNumber * verticalOutputImageCharacterNumber), horizontalOutputImageCharacterNumber)
-            else
+            } else {
                 verticalOutputImageCharacterNumber
+            }
 
             // 0 -> 8
             // 1 -> 1
             // 2 -> 2
             // 7 -> 7
-            val horizontalNumber = if (i == outputFileNumber - 1 && verticalNumber == 1 && ((maxId + 1) % horizontalOutputImageCharacterNumber != 0))
+            val horizontalNumber = if (i == outputFileNumber - 1 && verticalNumber == 1 && ((maxId + 1) % horizontalOutputImageCharacterNumber != 0)) {
                 (maxId + 1) % horizontalOutputImageCharacterNumber
-            else
+            } else {
                 horizontalOutputImageCharacterNumber
+            }
 
             val outputImage = BufferedImage(
                 horizontalNumber * ANIMATION_TILE_WIDTH,

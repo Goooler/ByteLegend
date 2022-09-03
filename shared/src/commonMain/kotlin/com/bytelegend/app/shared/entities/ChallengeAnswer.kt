@@ -169,6 +169,7 @@ data class CheckRunAnswerData(
 
     @JsonIgnore
     fun isCompleted() = action.equals(CheckRunEventAction.COMPLETED.name, true)
+
     @JsonIgnore
     fun isCreated() = action.equals(CheckRunEventAction.CREATED.name, true)
 }

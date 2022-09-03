@@ -35,11 +35,14 @@ class AchievementWidget : GameUIComponent<GameProps, State>() {
         BootstrapListGroupItem {
             onClick = {
                 game.modalController.show {
-                    child(AchievementModal::class.react, jso {
+                    child(
+                        AchievementModal::class.react,
+                        jso {
                         this.game = props.game
                         this.title = "MyAchievements"
                         this.emptyText = "YouDontHaveAnyAchievements"
-                    })
+                    }
+                    )
                 }
             }
             div {

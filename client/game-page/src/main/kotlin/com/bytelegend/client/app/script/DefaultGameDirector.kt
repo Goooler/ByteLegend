@@ -243,7 +243,8 @@ class DefaultGameDirector(
         movingPath: List<GridCoordinate>,
         destMap: String
     ) {
-        scripts.add(FunctionScript {
+        scripts.add(
+            FunctionScript {
             gameScene.objects.getById<CharacterSprite>(HERO_ID).close()
 
             // Create a special NPC, and make it move.
@@ -263,7 +264,8 @@ class DefaultGameDirector(
                 }
                 game.sceneContainer.unsafeCast<DefaultGameSceneContainer>().heroEnterScene(destMap)
             }
-        })
+        }
+        )
     }
 
     override fun startBeginnerGuide() {
@@ -280,7 +282,8 @@ class DefaultGameDirector(
     }
 
     override fun enterScene(targetMapId: String, onSuccess: UnitFunction, onFail: UnitFunction) {
-        scripts.add(RunSuspendFunctionScript {
+        scripts.add(
+            RunSuspendFunctionScript {
             try {
                 webSocketClient.switchScene(targetMapId)
                 onSuccess()
@@ -288,7 +291,8 @@ class DefaultGameDirector(
                 logger.error(e.stackTraceToString())
                 onFail()
             }
-        })
+        }
+        )
     }
 
     override fun useItem(item: String, targetCoordinate: GridCoordinate?) {
@@ -307,14 +311,17 @@ class DefaultGameDirector(
             require(!it.animationId.isNullOrEmpty()) { "Animation is empty!" }
         }
 
-        scripts.add(RunSuspendFunctionScript(false) {
-            (builders.filter { it.audioId != null }
+        scripts.add(
+            RunSuspendFunctionScript(false) {
+            (
+                builders.filter { it.audioId != null }
                 .map {
                     game.resourceLoader.loadAsync(
                         AudioResource(it.audioId!!, game.resolve("/audio/${it.audioId!!}.mp3")),
                         false
                     )
-                } + builders.map { game.resourceLoader.loadAsync(ImageResource(it.animationId!!, game.resolve("/img/animations/${it.animationId!!}.png")), false) }).awaitAll()
+                } + builders.map { game.resourceLoader.loadAsync(ImageResource(it.animationId!!, game.resolve("/img/animations/${it.animationId!!}.png")), false) }
+            ).awaitAll()
 
             var runningAnimationNumber = builders.size
 
@@ -343,13 +350,16 @@ class DefaultGameDirector(
                     window.setTimeout(it.onStart, it.initDelayMs.toInt())
                 }
             }
-        })
+        }
+        )
     }
 
     override fun sleep(ms: Long) {
-        scripts.add(RunSuspendFunctionScript(true) {
+        scripts.add(
+            RunSuspendFunctionScript(true) {
             delay(ms)
-        })
+        }
+        )
     }
 
     override fun runSuspend(fn: suspend () -> Unit) {

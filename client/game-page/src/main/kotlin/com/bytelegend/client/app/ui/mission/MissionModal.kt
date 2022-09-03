@@ -72,11 +72,14 @@ class MissionModal : GameUIComponent<MissionModalProps, MissionModalState>() {
     }
 
     override fun render() = Fragment.create {
-        child(ModalCloseButton::class.react, jso {
+        child(
+            ModalCloseButton::class.react,
+            jso {
             onClickFunction = {
                 game.modalController.hide(props.missionId)
             }
-        })
+        }
+        )
         BootstrapModalBody {
             className = "mission-modal-body"
             val missions = game.activeScene.unsafeCast<DefaultGameScene>().missions
@@ -103,12 +106,15 @@ class MissionModal : GameUIComponent<MissionModalProps, MissionModalState>() {
                                         if (moreThanOneChallenge) {
                                             +"$challengeCounter "
                                         }
-                                        child(TitleStarCounter::class.react, jso {
+                                        child(
+                                            TitleStarCounter::class.react,
+                                            jso {
                                             val challengeSpec = tab.unsafeCast<ChallengeTabData>().data
                                             total = challengeSpec.star
                                             current = game.activeScene.challengeAnswers.challengeStar(challengeSpec.id)
                                             starSize = 16
-                                        })
+                                        }
+                                        )
                                     }
                                 }
                                 onSelect = {
@@ -140,14 +146,17 @@ class MissionModal : GameUIComponent<MissionModalProps, MissionModalState>() {
     }
 
     private fun ChildrenBuilder.heroNoticeboardChallenge(missionModalData: MissionModalData, tab: HeroNoticeboardTabData) {
-        child(JavaIslandHeroNoticeboard::class.react, jso {
+        child(
+            JavaIslandHeroNoticeboard::class.react,
+            jso {
             game = props.game
             this.missionModalData = missionModalData
             initTiles = tab.data.tiles
             totalPage = tab.data.page
             challengeSpec = tab.challengeSpec
             whitelist = tab.whitelist
-        })
+        }
+        )
     }
 
     private fun ChildrenBuilder.textContentChallenge(tab: ChallengeTabData) {
@@ -157,29 +166,38 @@ class MissionModal : GameUIComponent<MissionModalProps, MissionModalState>() {
     }
 
     private fun ChildrenBuilder.renderPullRequestChallenge(missionModalData: MissionModalData, tab: ChallengeTabData) {
-        child(PullRequestChallengeTab::class.react, jso {
+        child(
+            PullRequestChallengeTab::class.react,
+            jso {
             game = props.game
             this.missionModalData = missionModalData
             challengeSpec = tab.data
             whitelist = tab.whitelist
-        })
+        }
+        )
     }
 
     private fun ChildrenBuilder.renderStarChallenge(missionModalData: MissionModalData, tab: ChallengeTabData) {
-        child(StarChallengeTab::class.react, jso {
+        child(
+            StarChallengeTab::class.react,
+            jso {
             game = props.game
             this.missionModalData = missionModalData
             contentHtml = props.game.i(tab.data.readme)
             challengeSpec = tab.data
-        })
+        }
+        )
     }
 
     private fun ChildrenBuilder.renderQuestionChallenge(missionModalData: MissionModalData, tabData: ChallengeTabData) {
-        child(QuestionChallengeTab::class.react, jso {
+        child(
+            QuestionChallengeTab::class.react,
+            jso {
             game = props.game
             this.missionModalData = missionModalData
             challengeSpec = tabData.data
-        })
+        }
+        )
     }
 
     private fun onMissionDataLoadFinish(missionId: String) {

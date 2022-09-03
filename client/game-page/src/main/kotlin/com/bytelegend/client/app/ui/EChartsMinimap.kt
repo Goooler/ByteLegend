@@ -76,6 +76,7 @@ class EChartsMinimap : GameUIComponent<EChartsMinimapProps, EChartsRoadmapState>
     init {
         state = jso()
     }
+
     private val echartsContainerElementId = "echarts-container-${uuid()}"
 
     private var mapId: String = ""
@@ -111,7 +112,12 @@ class EChartsMinimap : GameUIComponent<EChartsMinimapProps, EChartsRoadmapState>
     }
 
     private fun onMouseMoveOnMinimap(event: MouseEvent) {
-        document.getElementById(echartsContainerElementId)?.firstChild?.dispatchEvent(MouseEvent("mousemove", event.asDynamic()))
+        document.getElementById(echartsContainerElementId)?.firstChild?.dispatchEvent(
+            MouseEvent(
+                "mousemove",
+                event.asDynamic()
+            )
+        )
     }
 
     private fun onMouseout() {
@@ -140,9 +146,13 @@ class EChartsMinimap : GameUIComponent<EChartsMinimapProps, EChartsRoadmapState>
         unmountEcharts()
 
         document.getElementById(echartsContainerElementId)?.apply {
-            echarts = window.asDynamic().echarts.init(this, props.theme, jso {
-                renderer = props.renderer
-            })
+            echarts = window.asDynamic().echarts.init(
+                this,
+                props.theme,
+                jso {
+                    renderer = props.renderer
+                }
+            )
             val features = activeScene.getMinimapMapFeatures()
             window.asDynamic().echarts.registerMap("minimap", features)
         }

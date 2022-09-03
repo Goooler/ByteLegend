@@ -116,13 +116,19 @@ class DefaultGameCanvasState(
     private fun calculateUIContainerSize(gameContainerSize: PixelSize, canvasPixelSize: PixelSize): PixelSize {
         val maxCanvasHeight = gameContainerSize.height - 2 * MIN_UI_CONTAINER_WIDTH
         val uiContainerHeight =
-            if (gameMap.pixelSize.height > maxCanvasHeight) canvasPixelSize.height
-            else gameContainerSize.height - 2 * GAME_CONTAINER_UI_CONTAINER_GAP
+            if (gameMap.pixelSize.height > maxCanvasHeight) {
+                canvasPixelSize.height
+            } else {
+                gameContainerSize.height - 2 * GAME_CONTAINER_UI_CONTAINER_GAP
+            }
 
         val maxCanvasWidth = gameContainerSize.width - 2 * MIN_UI_CONTAINER_WIDTH
         val uiContainerWidth =
-            if (gameMap.pixelSize.width > maxCanvasWidth) canvasPixelSize.width
-            else gameContainerSize.width - 2 * GAME_CONTAINER_UI_CONTAINER_GAP
+            if (gameMap.pixelSize.width > maxCanvasWidth) {
+                canvasPixelSize.width
+            } else {
+                gameContainerSize.width - 2 * GAME_CONTAINER_UI_CONTAINER_GAP
+            }
 
         return PixelSize(uiContainerWidth, uiContainerHeight)
     }

@@ -144,15 +144,21 @@ enum class Locale(
     }
 
     val javascriptLocale: String
-        get() = if (countryRegion == null) this.lowercase()
-        // zh-CN, zh-TW
-        else "${language.code.lowercase()}-$countryRegion"
+        get() = if (countryRegion == null) {
+            this.lowercase()
+        } // zh-CN, zh-TW
+        else {
+            "${language.code.lowercase()}-$countryRegion"
+        }
 
     val googleTranslateApiCode: String
         get() =
-            if (countryRegion == null) this.lowercase()
-            // zh-CN, zh-TW
-            else "${language.code.lowercase()}-$countryRegion"
+            if (countryRegion == null) {
+                this.lowercase()
+            } // zh-CN, zh-TW
+            else {
+                "${language.code.lowercase()}-$countryRegion"
+            }
 
     companion object {
         fun of(str: String?, default: Locale = DEFAULT_LOCALE): Locale =

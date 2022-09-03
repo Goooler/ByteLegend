@@ -82,9 +82,11 @@ class WebEditor : Component<WebEditorProps, WebEditorState>() {
     private val liveLogStreamEventListener: EventListener<LogStreamEventData> = this::onLiveLogStream
     private val openTutorialsEventListener: EventListener<Nothing> = this::onOpenTutorials
     private val webEditorReadyForInitDataEventListener: EventListener<Nothing> = {
-        postMessageToWebEditorIframe(jso<dynamic> {
+        postMessageToWebEditorIframe(
+            jso<dynamic> {
             bytelegendInitData = determineWebEditorInitData()
-        })
+        }
+        )
     }
     private val webEditorInitCompletedEventListener: EventListener<Nothing> = {
         setState { showSubmitAnswerButton = true }
@@ -119,18 +121,23 @@ class WebEditor : Component<WebEditorProps, WebEditorState>() {
             }
 
             if (state.showSubmitAnswerButton && isPullRequestChallenge && !props.game.heroPlayer.isAnonymous) {
-                child(WebEditorButtonGroup::class.react, jso {
+                child(
+                    WebEditorButtonGroup::class.react,
+                    jso {
                     game = props.game
                     challengeId = props.challengeSpec.id
                     missionModalData = props.missionModalData
                     onClickSubmitAnswerButton = {
                         val arg = nativeJsArrayOf()
-                        postMessageToWebEditorIframe(jso<dynamic> {
+                        postMessageToWebEditorIframe(
+                            jso<dynamic> {
                             forwardCommand = "bytelegend.submitAnswer"
                             forwardCommandArgs = arg
-                        })
+                        }
+                        )
                     }
-                })
+                }
+                )
             }
         }
     }
@@ -145,9 +152,11 @@ class WebEditor : Component<WebEditorProps, WebEditorState>() {
         return if (isPullRequestChallenge) {
             val latestPullRequestAnswer = getLatestOpenPullRequest()
             val targetBranch =
-                if (latestPullRequestAnswer != null && latestPullRequestAnswer.baseRepoFullName == latestPullRequestAnswer.headRepoFullName)
+                if (latestPullRequestAnswer != null && latestPullRequestAnswer.baseRepoFullName == latestPullRequestAnswer.headRepoFullName) {
                     latestPullRequestAnswer.branch
-                else "main"
+                } else {
+                    "main"
+                }
             "$baseUrl/${props.challengeSpec.spec.substringAfter("github.com/")}/blob/$targetBranch/README.md?v=$timestamp"
         } else {
             "$baseUrl?v=$timestamp"
@@ -247,19 +256,23 @@ class WebEditor : Component<WebEditorProps, WebEditorState>() {
     }
 
     private fun onOpenTutorials(n: Nothing) {
-        postMessageToWebEditorIframe(jso<dynamic> {
+        postMessageToWebEditorIframe(
+            jso<dynamic> {
             forwardCommand = "bytelegend.views.tutorials.focus"
             forwardCommandArgs = nativeJsArrayOf()
-        })
+        }
+        )
     }
 
     private fun onLiveLogStream(logStreamEventData: LogStreamEventData) {
         if (logStreamEventData.challengeId == props.challengeSpec.id) {
             val args = nativeJsArrayOf(logStreamEventData.checkRunId, logStreamEventData.lines.toTypedArray())
-            postMessageToWebEditorIframe(jso<dynamic> {
+            postMessageToWebEditorIframe(
+                jso<dynamic> {
                 forwardCommand = "bytelegend.appendLog"
                 forwardCommandArgs = args
-            })
+            }
+            )
         }
     }
 
@@ -267,17 +280,22 @@ class WebEditor : Component<WebEditorProps, WebEditorState>() {
         if (eventData.newValue.challengeId == props.challengeSpec.id) {
             val prAnswers = props.game.activeScene.challengeAnswers.getPullRequestChallengeAnswersByChallengeId(props.challengeSpec.id)
             if (!prAnswers.anyCheckRunning()) {
-                props.game.eventBus.emit(ANSWER_BUTTON_CONTROL_EVENT, jso<dynamic> {
+                props.game.eventBus.emit(
+                    ANSWER_BUTTON_CONTROL_EVENT,
+                    jso<dynamic> {
                     spinning = false
                     textId = "SubmitAnswer"
-                })
+                }
+                )
             }
 
             val args = nativeJsArrayOf(prAnswers.toJsArray())
-            postMessageToWebEditorIframe(jso<dynamic> {
+            postMessageToWebEditorIframe(
+                jso<dynamic> {
                 forwardCommand = "bytelegend.updateAnswers"
                 forwardCommandArgs = args
-            })
+            }
+            )
         }
     }
 }

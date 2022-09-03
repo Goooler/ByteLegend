@@ -54,9 +54,11 @@ inline fun <T, reified R> Array<Array<T>>.mapWithIndex(fn: (T, GridCoordinate) -
     val tmp: MutableList<Array<R>> = mutableListOf()
 
     withIndex().forEach { row ->
-        tmp.add(row.value.withIndex().map {
+        tmp.add(
+            row.value.withIndex().map {
             fn(it.value, GridCoordinate(it.index, row.index))
-        }.toTypedArray())
+        }.toTypedArray()
+        )
     }
     return tmp.toTypedArray()
 }
@@ -65,9 +67,11 @@ inline fun <T, reified R> List<List<T>>.mapToArrayWithIndex(fn: (T, GridCoordina
     val tmp: MutableList<Array<R>> = mutableListOf()
 
     withIndex().forEach { row ->
-        tmp.add(row.value.withIndex().map {
+        tmp.add(
+            row.value.withIndex().map {
             fn(it.value, GridCoordinate(it.index, row.index))
-        }.toTypedArray())
+        }.toTypedArray()
+        )
     }
     return tmp.toTypedArray()
 }

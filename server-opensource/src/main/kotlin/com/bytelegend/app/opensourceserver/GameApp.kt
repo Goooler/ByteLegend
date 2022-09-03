@@ -241,7 +241,8 @@ class GameWebSocketServer(private val jsonMapper: JsonMapper) : TextWebSocketHan
         } catch (t: Throwable) {
             t.printStackTrace()
             val replyErrorMessage = ReplyMessage(
-                WebSocketMessageType.REPLY_ERROR, message.replyAddress,
+                WebSocketMessageType.REPLY_ERROR,
+                message.replyAddress,
                 t.message
                     ?: ""
             )

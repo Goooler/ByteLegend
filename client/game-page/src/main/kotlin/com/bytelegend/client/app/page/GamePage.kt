@@ -124,11 +124,17 @@ fun main() {
         null
     }
 
-    render(Fragment.create {
-        child(GamePage::class.react, jso {
+    render(
+        Fragment.create {
+        child(
+            GamePage::class.react,
+            jso {
             this.game = game
-        })
-    }, document.getElementById("app")!!)
+        }
+        )
+    },
+        document.getElementById("app")!!
+    )
 }
 
 interface GamePageState : State {
@@ -207,10 +213,13 @@ class GamePage(props: GameProps) : Component<GameProps, GamePageState>(props) {
         if (state.sceneLoading) {
             // some global resources like `common-en.json` still requires to be loaded
             // GameScene.load() doesn't take this into consideration
-            child(LoadingPage::class.react, jso {
+            child(
+                LoadingPage::class.react,
+                jso {
                 this.game = props.game
                 eventBus = game.eventBus
-            })
+            }
+            )
         } else {
             gameContainer(game) {
                 heroIndicator(this)
@@ -276,10 +285,13 @@ class GamePage(props: GameProps) : Component<GameProps, GamePageState>(props) {
     }
 
     private fun ChildrenBuilder.gameContainer(game: Game, block: GameContainerProps.() -> Unit = {}) {
-        child(GameContainer::class.react, jso {
+        child(
+            GameContainer::class.react,
+            jso {
             this.game = game
             block()
-        })
+        }
+        )
     }
 
     private fun heroIndicator(

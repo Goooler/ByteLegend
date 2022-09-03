@@ -44,9 +44,12 @@ class ReputationCountWidget : AbstractIncrementAnimatableWidget<ReputationCountW
 
     override fun onClick() {
         game.modalController.show {
-            child(HistoryModal::class.react, jso {
+            child(
+                HistoryModal::class.react,
+                jso {
                 this.game = props.game
-            })
+            }
+            )
         }
     }
 

@@ -40,13 +40,16 @@ class BouncingTitleObject(
     override val roles: Set<String> = jsObjectBackedSetOf(GameObjectRole.HasBouncingTitle.toString())
     override var bouncingTitleEnabled: Boolean = true
     override fun renderBouncingTitle(builder: ChildrenBuilder) {
-        builder.child(BouncingTitleWidget::class.react, jso {
+        builder.child(
+            BouncingTitleWidget::class.react,
+            jso {
             pixelCoordinate = this@BouncingTitleObject.pixelCoordinate
             onClickFunction = this@BouncingTitleObject.onClickFunction
             title = titleText
             gameScene = this@BouncingTitleObject.gameScene
             backgroundColor = this@BouncingTitleObject.backgroundColor
             color = this@BouncingTitleObject.color
-        })
+        }
+        )
     }
 }

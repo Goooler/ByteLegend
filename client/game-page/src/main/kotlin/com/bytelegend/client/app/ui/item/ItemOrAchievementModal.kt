@@ -101,7 +101,9 @@ abstract class ItemOrAchievementModal : GameUIComponent<ItemOrAchievementModalPr
                         +i(props.emptyText)
                     } else {
                         state.items.forEach { (id, item) ->
-                            child(ItemAchievementModalItem::class.react, jso {
+                            child(
+                                ItemAchievementModalItem::class.react,
+                                jso {
                                 this.id = id
                                 iconUrl = game.resolve(item.metadata.iconUrl)
                                 name = game.i(item.metadata.nameTextId)
@@ -145,7 +147,8 @@ abstract class ItemOrAchievementModal : GameUIComponent<ItemOrAchievementModalPr
                                         }
                                     }
                                 }
-                            })
+                            }
+                            )
                         }
 
                         if (state.descCoordinate != null) {

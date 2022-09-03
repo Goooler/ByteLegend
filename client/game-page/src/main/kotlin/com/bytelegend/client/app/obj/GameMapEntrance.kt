@@ -68,7 +68,9 @@ class GameMapEntrance(
     override fun renderBouncingTitle(builder: ChildrenBuilder) {
         val scene = gameScene
         val entranceCoordinate = pixelCoordinate
-        builder.child(BouncingTitleWidget::class.react, jso {
+        builder.child(
+            BouncingTitleWidget::class.react,
+            jso {
             title = scene.gameRuntime.i(destMapId)
             pixelCoordinate = entranceCoordinate + PixelCoordinate(scene.map.tileSize.width / 2, 0)
             gameScene = scene
@@ -77,6 +79,7 @@ class GameMapEntrance(
             onClickFunction = {
                 scene.gameRuntime.sceneContainer.loadScene(destMapId)
             }
-        })
+        }
+        )
     }
 }

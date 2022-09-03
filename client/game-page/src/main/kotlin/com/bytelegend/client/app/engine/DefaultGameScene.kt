@@ -246,9 +246,12 @@ class DefaultGameScene(
             ).apply {
                 onClickFunction = {
                     gameRuntime.modalController.unsafeCast<DefaultModalController>().show {
-                        child(InvitationCodeModal::class.react, jso {
+                        child(
+                            InvitationCodeModal::class.react,
+                            jso {
                             game = gameRuntime.unsafeCast<Game>()
-                        })
+                        }
+                        )
                     }
                 }
             }

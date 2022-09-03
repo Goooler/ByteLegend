@@ -177,7 +177,10 @@ class MapGenerator(
         layer.id.toInt() to i - playerLayerIndex
     }.toMap()
     private val tiledObjectReader = TiledObjectReader(
-        mapId, tiledMap, mapDataReader, rawLayerIdToIndexMap,
+        mapId,
+        tiledMap,
+        mapDataReader,
+        rawLayerIdToIndexMap,
         System.getProperty("allMapIds").split(",").toSet()
     )
     private val dynamicSpriteReader = DynamicSpriteReader()
@@ -195,8 +198,11 @@ class MapGenerator(
                     .flatMap { layer ->
                         val i = (y * tiledMap.width + x).toInt()
                         val tileIndex = layer.data[i].toInt()
-                        if (tileIndex == 0) emptyList()
-                        else listOf(resolveTile(tileIndex, rawLayerIdToIndexMap.getValue(layer.id.toInt())))
+                        if (tileIndex == 0) {
+                            emptyList()
+                        } else {
+                            listOf(resolveTile(tileIndex, rawLayerIdToIndexMap.getValue(layer.id.toInt())))
+                        }
                     }.removeRedundantLayers()
                 srcTiles[GridCoordinate(x.toInt(), y.toInt())] = RawTileLayers(tileLayersAtCoordinate)
             }
@@ -581,10 +587,11 @@ class MapGenerator(
                     val realY = y + firstTileCoordinate.y
                     val tileLayer: TileLayer = resolveTile(data[realY * width.toInt() + realX].toInt(), 0 /* dummy */)
                     val blocks =
-                        if (tileLayer is StaticTileImageLayer)
+                        if (tileLayer is StaticTileImageLayer) {
                             listOf(tileLayer.tile)
-                        else
+                        } else {
                             (tileLayer as AnimationLayer).frames.map { it.imageBlock }
+                        }
                     row.add(blocks)
                     blocks.forEach {
                         // frame by frame

@@ -115,7 +115,9 @@ private fun List<String>.parseLicenseFromYaml(): String {
  */
 fun main() {
     val rootProjectDir = File(".").toPath()
-    Files.walkFileTree(rootProjectDir, object : FileVisitor<Path> {
+    Files.walkFileTree(
+        rootProjectDir,
+        object : FileVisitor<Path> {
         override fun preVisitDirectory(dir: Path, attrs: BasicFileAttributes): FileVisitResult {
             return if (dir.isIgnoredPath()) {
                 FileVisitResult.SKIP_SUBTREE
@@ -147,7 +149,8 @@ fun main() {
             }
             return FileVisitResult.CONTINUE
         }
-    })
+    }
+    )
 }
 
 internal fun String.isValidLicense(): Boolean {

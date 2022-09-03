@@ -138,7 +138,9 @@ class WebEditorButtonGroup(props: WebEditorButtonGroupProps) : Component<WebEdit
                 left = "calc($DEFAULT_LEFT + ${state.left}px)"
                 top = "calc($DEFAULT_TOP + ${state.top}px)"
             }
-            child(SubmitAnswerButton::class.react, jso {
+            child(
+                SubmitAnswerButton::class.react,
+                jso {
                 challengeId = props.challengeId
                 game = props.game
                 onClick = props.onClickSubmitAnswerButton
@@ -148,8 +150,11 @@ class WebEditorButtonGroup(props: WebEditorButtonGroupProps) : Component<WebEdit
                 onMouseDown = ::onMouseDown
                 onMouseUp = ::onMouseUp
                 onMouseMove = ::onMouseMove
-            })
-            child(OpenTutorialsButton::class.react, jso {
+            }
+            )
+            child(
+                OpenTutorialsButton::class.react,
+                jso {
                 game = props.game
                 missionModalData = props.missionModalData
                 left = -64
@@ -160,8 +165,11 @@ class WebEditorButtonGroup(props: WebEditorButtonGroupProps) : Component<WebEdit
                 onMouseDown = ::onMouseDown
                 onMouseUp = ::onMouseUp
                 onMouseMove = ::onMouseMove
-            })
-            child(AskForHelpButton::class.react, jso {
+            }
+            )
+            child(
+                AskForHelpButton::class.react,
+                jso {
                 game = props.game
                 missionModalData = props.missionModalData
                 left = 60
@@ -172,7 +180,8 @@ class WebEditorButtonGroup(props: WebEditorButtonGroupProps) : Component<WebEdit
                 onMouseDown = ::onMouseDown
                 onMouseUp = ::onMouseUp
                 onMouseMove = ::onMouseMove
-            })
+            }
+            )
         }
     }
 }

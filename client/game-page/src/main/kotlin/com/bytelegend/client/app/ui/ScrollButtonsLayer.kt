@@ -127,26 +127,34 @@ class ScrollButtonsLayer : GameUIComponent<ScrollButtonsProps, ScrollButtonsStat
 
         // four bars to hide pre-rendered background canvas
         absoluteDiv(
-            left = 0, top = 0,
-            width = gameContainerWidth, height = horizontalButtonHeight,
+            left = 0,
+            top = 0,
+            width = gameContainerWidth,
+            height = horizontalButtonHeight,
             className = "black-background",
             zIndex = Layer.MapCanvas.zIndex() + 1
         )
         absoluteDiv(
-            left = 0, top = 0,
-            width = verticalButtonWidth, height = gameContainerHeight,
+            left = 0,
+            top = 0,
+            width = verticalButtonWidth,
+            height = gameContainerHeight,
             className = "black-background",
             zIndex = Layer.MapCanvas.zIndex() + 1
         )
         absoluteDiv(
-            left = gameContainerWidth - verticalButtonWidth, top = 0,
-            width = verticalButtonWidth, height = gameContainerHeight,
+            left = gameContainerWidth - verticalButtonWidth,
+            top = 0,
+            width = verticalButtonWidth,
+            height = gameContainerHeight,
             className = "black-background",
             zIndex = Layer.MapCanvas.zIndex() + 1
         )
         absoluteDiv(
-            left = 0, top = gameContainerHeight - horizontalButtonHeight,
-            width = gameContainerWidth, height = horizontalButtonHeight,
+            left = 0,
+            top = gameContainerHeight - horizontalButtonHeight,
+            width = gameContainerWidth,
+            height = horizontalButtonHeight,
             className = "black-background",
             zIndex = Layer.MapCanvas.zIndex() + 1
         )
@@ -154,13 +162,18 @@ class ScrollButtonsLayer : GameUIComponent<ScrollButtonsProps, ScrollButtonsStat
 
     private fun ChildrenBuilder.bottomLeftCorner() {
         scrollButton(
-            0, gameContainerHeight * 3 / 4,
-            verticalButtonWidth, gameContainerWidth / 4, LEFT_DOWN
+            0,
+            gameContainerHeight * 3 / 4,
+            verticalButtonWidth,
+            gameContainerWidth / 4,
+            LEFT_DOWN
         )
         scrollButton(
-            0, gameContainerHeight - horizontalButtonHeight,
+            0,
+            gameContainerHeight - horizontalButtonHeight,
             gameContainerWidth / 4,
-            horizontalButtonHeight, LEFT_DOWN
+            horizontalButtonHeight,
+            LEFT_DOWN
         )
     }
 
@@ -183,12 +196,18 @@ class ScrollButtonsLayer : GameUIComponent<ScrollButtonsProps, ScrollButtonsStat
 
     private fun ChildrenBuilder.topRightCorner() {
         scrollButton(
-            gameContainerWidth * 3 / 4, 0, props.game.gameContainerSize.width / 4,
-            horizontalButtonHeight, RIGHT_UP
+            gameContainerWidth * 3 / 4,
+            0,
+            props.game.gameContainerSize.width / 4,
+            horizontalButtonHeight,
+            RIGHT_UP
         )
         scrollButton(
-            gameContainerWidth - verticalButtonWidth, 0,
-            verticalButtonWidth, gameContainerHeight / 4, RIGHT_UP
+            gameContainerWidth - verticalButtonWidth,
+            0,
+            verticalButtonWidth,
+            gameContainerHeight / 4,
+            RIGHT_UP
         )
     }
 
@@ -209,8 +228,11 @@ class ScrollButtonsLayer : GameUIComponent<ScrollButtonsProps, ScrollButtonsStat
 
     private fun ChildrenBuilder.left() {
         scrollButton(
-            0, gameContainerHeight / 4,
-            verticalButtonWidth, gameContainerHeight / 2, LEFT
+            0,
+            gameContainerHeight / 4,
+            verticalButtonWidth,
+            gameContainerHeight / 2,
+            LEFT
         )
     }
 
@@ -226,8 +248,11 @@ class ScrollButtonsLayer : GameUIComponent<ScrollButtonsProps, ScrollButtonsStat
 
     private fun ChildrenBuilder.up() {
         scrollButton(
-            gameContainerWidth / 4, 0, gameContainerWidth / 2,
-            horizontalButtonHeight, UP
+            gameContainerWidth / 4,
+            0,
+            gameContainerWidth / 2,
+            horizontalButtonHeight,
+            UP
         )
     }
 

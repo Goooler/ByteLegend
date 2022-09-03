@@ -162,11 +162,12 @@ class DefaultChallengeAnswersContainer(
             val endCoordinateInGameContainer: PixelCoordinate =
                 canvasState.determineRightSideBarTopLeftCornerCoordinateInGameContainer()
             val startCoordinateInGameContainer: PixelCoordinate =
-                if (mission.id == STAR_BYTELEGEND_MISSION_ID)
-                // See MenuItem, from the GitHub menu icon
+                if (mission.id == STAR_BYTELEGEND_MISSION_ID) {
+                        // See MenuItem, from the GitHub menu icon
                     canvasState.determineMenuCoordinateInGameContainer()
-                else
+                } else {
                     canvasState.calculateCoordinateInGameContainer(mission.gridCoordinate)
+                }
 
             if (!gameControl.isWindowVisible) {
                 gameScene.scripts(ASYNC_ANIMATION_CHANNEL, false) {

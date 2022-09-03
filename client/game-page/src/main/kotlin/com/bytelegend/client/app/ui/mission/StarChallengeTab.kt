@@ -33,10 +33,13 @@ interface StarChallengeTabProps : GameProps {
 
 class StarChallengeTab : Component<StarChallengeTabProps, State>() {
     override fun render() = Fragment.create {
-        child(WebEditor::class.react, jso {
+        child(
+            WebEditor::class.react,
+            jso {
             missionModalData = props.missionModalData
             game = props.game
             challengeSpec = props.challengeSpec
-        })
+        }
+        )
     }
 }

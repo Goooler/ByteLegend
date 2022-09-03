@@ -51,4 +51,3 @@ dependencies {
 
     testImplementation(kotlin("test-js"))
 }
-

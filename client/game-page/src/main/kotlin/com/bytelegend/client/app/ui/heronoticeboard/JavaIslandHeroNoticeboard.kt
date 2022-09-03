@@ -174,12 +174,15 @@ class JavaIslandHeroNoticeboard(props: JavaIslandHeroNoticeboardProps) :
                 }
             }
 
-            child(WebEditor::class.react, jso {
+            child(
+                WebEditor::class.react,
+                jso {
                 game = props.game
                 whitelist = props.whitelist
                 missionModalData = props.missionModalData
                 challengeSpec = props.challengeSpec
-            })
+            }
+            )
         }
     }
 
@@ -292,11 +295,14 @@ class JavaIslandHeroNoticeboard(props: JavaIslandHeroNoticeboardProps) :
     }
 
     private fun ChildrenBuilder.avatarTooltip() {
-        child(AvatarTooltip::class.react, jso {
+        child(
+            AvatarTooltip::class.react,
+            jso {
             game = props.game
             joinedAtI18n = props.game.i("JoinedAt")
             tile = state.hoveredTile!!
-        })
+        }
+        )
     }
 
     override fun componentDidMount() {

@@ -91,13 +91,15 @@ class I18nResource(
                             localeToText[locale.toString()] = DEFAULT_TRANSLATOR.translate(
                                 i18nTexts.format,
                                 i18nTexts.getTextOrNull(Locale.EN)!!,
-                                Locale.EN, Locale.ZH_HANT
+                                Locale.EN,
+                                Locale.ZH_HANT
                             )
                         } else {
                             localeToText[locale.toString()] = DEFAULT_TRANSLATOR.translate(
                                 i18nTexts.format,
                                 i18nTexts.getTextOrNull(Locale.ZH_HANS) ?: throw IllegalArgumentException("You must provide either EN or ZH_HANS for text $textId"),
-                                Locale.ZH_HANS, Locale.ZH_HANT
+                                Locale.ZH_HANS,
+                                Locale.ZH_HANT
                             )
                         }
                     }
@@ -105,7 +107,8 @@ class I18nResource(
                     else -> localeToText[locale.toString()] = DEFAULT_TRANSLATOR.translate(
                         i18nTexts.format,
                         i18nTexts.getTextOrNull(Locale.EN)!!,
-                        Locale.EN, locale
+                        Locale.EN,
+                        locale
                     )
                 }
             }
@@ -149,9 +152,12 @@ fun generate(gameDataDir: File, outputI18nDir: File, outputAllJson: File) {
 private fun File.yamlToLocalizedTexts(): LinkedHashMap<String, LocalizedText> {
     val content = readText()
     try {
-        return if (content.lines().all { it.isBlank() || it.startsWith("#") }) LinkedHashMap()
-        else YAML_PARSER.readValue(this, object : TypeReference<List<LocalizedText>>() {})
+        return if (content.lines().all { it.isBlank() || it.startsWith("#") }) {
+            LinkedHashMap()
+        } else {
+            YAML_PARSER.readValue(this, object : TypeReference<List<LocalizedText>>() {})
             .associateBy { it.id } as LinkedHashMap<String, LocalizedText>
+        }
     } catch (e: Exception) {
         throw IllegalStateException("Error parsing $this", e)
     }
@@ -159,9 +165,12 @@ private fun File.yamlToLocalizedTexts(): LinkedHashMap<String, LocalizedText> {
 
 private fun File.jsonToLocalizedTexts(): LinkedHashMap<String, LocalizedText> {
     val content = readText()
-    return if (content.isEmpty()) LinkedHashMap()
-    else uglyObjectMapper.readValue(this, object : TypeReference<List<LocalizedText>>() {})
+    return if (content.isEmpty()) {
+        LinkedHashMap()
+    } else {
+        uglyObjectMapper.readValue(this, object : TypeReference<List<LocalizedText>>() {})
         .associateBy { it.id } as LinkedHashMap<String, LocalizedText>
+    }
 }
 
 val YAML_FACTORY = YAMLFactory()

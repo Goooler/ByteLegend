@@ -147,11 +147,14 @@ class QuestionChallengeTab : GameUIComponent<QuestionChallengeTabProps, Question
 
             renderQuestionAnswers(answers)
 
-            child(WebEditor::class.react, jso {
+            child(
+                WebEditor::class.react,
+                jso {
                 game = props.game
                 missionModalData = props.missionModalData
                 challengeSpec = props.challengeSpec
-            })
+            }
+            )
         }
     }
 
@@ -203,8 +206,11 @@ class QuestionChallengeTab : GameUIComponent<QuestionChallengeTabProps, Question
                 BootstrapCard {
                     BootstrapAccordionToggle {
                         className =
-                            if (missionAnswer.accomplished) "list-group-item-success mission-player-answer"
-                            else "list-group-item-danger mission-player-answer"
+                            if (missionAnswer.accomplished) {
+                                "list-group-item-success mission-player-answer"
+                            } else {
+                                "list-group-item-danger mission-player-answer"
+                            }
                         `as` = BootstrapCardHeader
                         eventKey = index.toString()
 

@@ -63,11 +63,14 @@ class MissionTitle(props: MissionTitleProps) : AbstractBouncingTitleWidget<Missi
                     className = "title-star-answer-box"
                 ) {
                     div {
-                        child(TitleStarCounter::class.react, jso {
+                        child(
+                            TitleStarCounter::class.react,
+                            jso {
                             total = props.totalStar
                             current = state.currentStar
                             starSize = 24
-                        })
+                        }
+                        )
                     }
                 }
             }

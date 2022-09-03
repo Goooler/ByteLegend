@@ -38,12 +38,15 @@ interface CodeBlockProps : Props {
 }
 
 fun ChildrenBuilder.codeBlock(withLineNumber: Boolean = true, block: CodeBlockProps.() -> Unit = {}) {
-    child(PrismCodeBlock::class.react, jso {
+    child(
+        PrismCodeBlock::class.react,
+        jso {
         if (withLineNumber) {
             pluginClassName = "line-numbers"
         }
         block()
-    })
+    }
+    )
 }
 
 class PrismCodeBlock : Component<CodeBlockProps, State>() {

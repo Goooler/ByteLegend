@@ -131,7 +131,8 @@ abstract class AbstractByteLegendIntegrationTest {
                 }
             )
             post(
-                "http://localhost:$gameServerPort/internal-api/add-problems", defaultJsonMapper.toJson(payload),
+                "http://localhost:$gameServerPort/internal-api/add-problems",
+                defaultJsonMapper.toJson(payload),
                 mapOf("Content-Type" to "application/json", INTERNAL_API_SECRET_HEADER_NAME to "dummy")
             ).assert2XXStatusCode()
         }
@@ -142,7 +143,8 @@ abstract class AbstractByteLegendIntegrationTest {
 
     protected fun sendWebhookFromText(event: String, json: String) {
         post(
-            "http://localhost:$gameServerPort/github_webhook", json,
+            "http://localhost:$gameServerPort/github_webhook",
+            json,
             mapOf("Content-Type" to "application/json", "X-GitHub-Event" to event)
         ).assert2XXStatusCode()
     }
@@ -155,7 +157,8 @@ abstract class AbstractByteLegendIntegrationTest {
     protected fun sendWebhookFromJsonObject(event: String, payload: Any) {
         val json = defaultJsonMapper.toJson(payload)
         post(
-            "http://localhost:$gameServerPort/github_webhook", json,
+            "http://localhost:$gameServerPort/github_webhook",
+            json,
             mapOf("Content-Type" to "application/json", "X-GitHub-Event" to event)
         ).assert2XXStatusCode()
     }
@@ -163,7 +166,8 @@ abstract class AbstractByteLegendIntegrationTest {
     protected fun sendProblemsFromResource(resource: String) {
         val json = javaClass.getResourceAsFile(resource).readText()
         post(
-            "http://localhost:$gameServerPort/internal-api/add-problems", json,
+            "http://localhost:$gameServerPort/internal-api/add-problems",
+            json,
             mapOf("Content-Type" to "application/json", INTERNAL_API_SECRET_HEADER_NAME to "dummy")
         ).assert2XXStatusCode()
     }

@@ -27,6 +27,7 @@ external val BootstrapBadge: ElementType<BootstrapBadgeProps>
 // https://react-bootstrap.github.io/components/badge/
 external interface BootstrapBadgeProps : Props {
     var pill: Boolean
+
     // 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark'
     var variant: String
 }

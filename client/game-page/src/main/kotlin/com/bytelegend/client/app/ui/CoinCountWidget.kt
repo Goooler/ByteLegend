@@ -75,9 +75,12 @@ class CoinCountWidget : AbstractIncrementAnimatableWidget<CoinCountWidgetProps, 
                 +props.game.i("MyCoinHistory")
             }
             BootstrapModalBody {
-                child(CoinHistoryModal::class.react, jso {
+                child(
+                    CoinHistoryModal::class.react,
+                    jso {
                     this.game = props.game
-                })
+                }
+                )
             }
         }
     }

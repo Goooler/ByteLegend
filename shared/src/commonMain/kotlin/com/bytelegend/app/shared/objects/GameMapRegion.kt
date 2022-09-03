@@ -27,6 +27,7 @@ data class CompressedGameMapRegion(
     val next: List<String>
 ) : CompressedGameMapObject {
     override val type: Int = GameMapObjectType.GameMapRegion.index
+
     @get:JsonIgnore
     override val layer: Int = 0
 

@@ -207,9 +207,18 @@ class InvitationCodeModal(props: InvitationCodeModalProps) : Component<GameProps
     }
 
     private suspend fun postInvitationInformation(code: String): InvitationInformation {
-        return toInvitationInformation(JSON.parse(post("/game/api/invitation", JSON.stringify(jso<dynamic> {
+        return toInvitationInformation(
+            JSON.parse(
+                post(
+                    "/game/api/invitation",
+                    JSON.stringify(
+                        jso<dynamic> {
             this.invitationCode = code
-        }))))
+        }
+                    )
+                )
+            )
+        )
     }
 
     private suspend fun getInvitationInformation(): InvitationInformation {

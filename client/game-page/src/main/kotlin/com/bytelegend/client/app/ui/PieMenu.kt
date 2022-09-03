@@ -142,21 +142,25 @@ class PieMenuButton : Component<PieMenuButtonProps, PieMenuButtonState>() {
         }
 
         div {
-            setJsStyle(assign(commonStyle) {
+            setJsStyle(
+                assign(commonStyle) {
                 zIndex = (props.zIndex + 1).toString()
                 backgroundColor = "rgba(0,0,0,0.7)"
                 if (state.hovered) {
                     border = "2px solid white"
                 }
-            })
+            }
+            )
         }
         div {
             className = ClassName(props.item.iconClass)
-            setJsStyle(assign(commonStyle) {
+            setJsStyle(
+                assign(commonStyle) {
                 zIndex = (props.zIndex + 2).toString()
                 backgroundSize = "100% 100%"
                 cursor = "pointer"
-            })
+            }
+            )
             onMouseEnter = {
                 setState { hovered = true }
             }
@@ -227,21 +231,27 @@ class PieMenu : Component<PieMenuProps, PieMenuState>() {
                     transform = "translate(-50%, -50%)"
                 }
             }
-            child(PieMenuCloseButton::class.react, jso {
+            child(
+                PieMenuCloseButton::class.react,
+                jso {
                 zIndex = props.zIndex + 1
                 angle = (-45 + state.ratio * 45).toInt()
                 onCloseButtonClicked = props.onClose
-            })
+            }
+            )
 
             val anglePerButton = 360 / props.items.size
             props.items.forEachIndexed { index, item ->
-                child(PieMenuButton::class.react, jso {
+                child(
+                    PieMenuButton::class.react,
+                    jso {
                     zIndex = props.zIndex + 1
                     this.item = item
                     size = MENU_ITEM_BUTTON_PX
                     angle = index * anglePerButton
                     radius = (state.ratio * MENU_BUTTON_DISTANCE).toInt()
-                })
+                }
+                )
             }
         }
     }

@@ -57,13 +57,16 @@ class PlayerNames : GameUIComponent<PlayerNamesProps, PlayerNamesState>() {
         val x = imageBlockOnCanvas.x + canvasCoordinateInGameContainer.x + activeScene.map.tileSize.width / 2
         val y = imageBlockOnCanvas.y + canvasCoordinateInGameContainer.y - 10
 
-        child(PlayerNameSpan::class.react, jso {
+        child(
+            PlayerNameSpan::class.react,
+            jso {
             this.x = x
             this.y = y
             this.opacity = determineOpacity(sprite)
             name = playerNickName
             this.isHero = isHero
-        })
+        }
+        )
     }
 
     /**
@@ -106,10 +109,11 @@ class PlayerNameSpan : Component<PlayerNameSpanProps, State>() {
             top = props.y,
             zIndex = Layer.PlayerNames.zIndex(),
             opacity = props.opacity,
-            className = if (props.isHero)
+            className = if (props.isHero) {
                 "yellow-text-black-shadow nickname-span"
-            else
+            } else {
                 "white-text-black-shadow nickname-span"
+            }
         ) {
             +props.name
         }

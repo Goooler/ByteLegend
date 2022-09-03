@@ -96,8 +96,10 @@ internal fun CanvasRenderingContext2D.drawCurve(curve: GameCurveSprite, gameScen
         quadraticCurveTo(curve.points[i].x - originX, curve.points[i].y - originY, xc - originX, yc - originY)
     }
     quadraticCurveTo(
-        curve.points[curve.points.size - 2].x - originX, curve.points[curve.points.size - 2].y - originY,
-        curve.points[curve.points.size - 1].x - originX, curve.points[curve.points.size - 1].y - originY
+        curve.points[curve.points.size - 2].x - originX,
+        curve.points[curve.points.size - 2].y - originY,
+        curve.points[curve.points.size - 1].x - originX,
+        curve.points[curve.points.size - 1].y - originY
     )
     stroke()
     restore()

@@ -42,17 +42,17 @@ open class Player : BasePlayer() {
      * Note: items and states are updated asynchronously.
      * This means that `save()` should avoid saving these ReadOnly-marked fields.
      */
-    @get: ReadOnly
     // it's stored as dynamodb string set
-    var items: MutableList<String> = ArrayList()
+    @get: ReadOnly
+var items: MutableList<String> = ArrayList()
 
-    @get: ReadOnly
     // it's stored as dynamodb string set
-    var usedItems: MutableList<String> = ArrayList()
+    @get: ReadOnly
+var usedItems: MutableList<String> = ArrayList()
 
-    @get: ReadOnly
     // it's stored as dynamodb string set
-    var achievements: MutableList<String> = ArrayList()
+    @get: ReadOnly
+var achievements: MutableList<String> = ArrayList()
 
     /**
      * This is actually a set, but enhanced ddb client can't map to java.util.LinkedHashSet by default.
@@ -89,6 +89,7 @@ open class Player : BasePlayer() {
     var githubToken: String? = null
 
     var createdAt: String? = null
+
     /**
      * The time of last connection to server via WebSocket.
      */

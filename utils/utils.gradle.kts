@@ -66,10 +66,10 @@ fun registerJavaExecInRootProject(
     tasks.register<JavaExec>(name) {
         doFirst {
             mandatorySystemProperties.forEach {
-                jvmArgs("-D${it}=${System.getProperty(it) ?: throw IllegalArgumentException("No system property $it!")}")
+                jvmArgs("-D$it=${System.getProperty(it) ?: throw IllegalArgumentException("No system property $it!")}")
             }
             optionalSystemProperties.filter { System.getProperty(it) != null }.forEach {
-                jvmArgs("-D${it}=${System.getProperty(it)}")
+                jvmArgs("-D$it=${System.getProperty(it)}")
             }
         }
         jvmArgs("-Dapple.awt.UIElement=true")
@@ -82,12 +82,16 @@ fun registerJavaExecInRootProject(
 registerJavaExecInRootProject("createNewMap", "com.bytelegend.utils.CreateNewMapKt", listOf("mapId", "mapGridWidth", "mapGridHeight"))
 registerJavaExecInRootProject("createEmptyMissionYamls", "com.bytelegend.utils.CreateEmptyMissionYamlsKt", listOf("mapId"))
 registerJavaExecInRootProject(
-    "generateTileset", "com.bytelegend.utils.GenerateTilesetKt",
-    listOf("inputFiles", "tilesetName", "groupType"), listOf("outputFrameWidth", "backgroundColor")
+    "generateTileset",
+    "com.bytelegend.utils.GenerateTilesetKt",
+    listOf("inputFiles", "tilesetName", "groupType"),
+    listOf("outputFrameWidth", "backgroundColor")
 )
 registerJavaExecInRootProject(
-    "addTilesetToMap", "com.bytelegend.utils.AddTilesetToMapKt",
-    listOf("tilesetName", "groupType"), listOf("mapId")
+    "addTilesetToMap",
+    "com.bytelegend.utils.AddTilesetToMapKt",
+    listOf("tilesetName", "groupType"),
+    listOf("mapId")
 ) {
     mustRunAfter("generateTileset")
 }
@@ -98,5 +102,3 @@ registerJavaExecInRootProject("addLicenses", "com.bytelegend.utils.AddLicensesKt
 tasks.named("check") {
     dependsOn(checkLicenses)
 }
-
-
