@@ -23,7 +23,7 @@ pluginManagement {
 }
 
 plugins {
-    id("com.gradle.enterprise") version "3.11.1"
+    id("com.gradle.enterprise") version "3.12.4"
     id("io.github.gradle.gradle-enterprise-conventions-plugin") version "0.7.6"
 }
 
