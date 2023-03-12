@@ -17,7 +17,7 @@ plugins {
     id("org.springframework.boot") version "2.7.3"
     id("io.spring.dependency-management") version "1.0.13.RELEASE"
     kotlin("jvm")
-    kotlin("plugin.spring") version "1.7.10"
+    kotlin("plugin.spring") version "1.8.10"
     id("configure-kotlin")
     id("configure-ktlint")
 }
