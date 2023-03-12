@@ -32,7 +32,7 @@ dependencies {
     implementation("com.github.blindpirate:jsonschema2pojo-core:1.1.0.4")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10")
 
-    implementation("gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0")
+    implementation("com.github.johnrengelman:shadow:8.1.0")
 
     implementation(gradleApi())
 }
