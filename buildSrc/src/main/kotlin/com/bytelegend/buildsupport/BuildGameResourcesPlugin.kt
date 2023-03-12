@@ -219,7 +219,7 @@ class BuildGameResourcesPlugin : Plugin<Project> {
     }
 
     private fun Project.configureJson2Java(vararg copyJsonTasks: TaskProvider<*>) {
-        tasks.withType(Json2JavaTask::class.java) {
+        tasks.withType(Json2JavaTask::class.java).configureEach {
             dependsOn(*copyJsonTasks)
         }
 

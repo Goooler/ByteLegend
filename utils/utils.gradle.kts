@@ -25,7 +25,7 @@ plugins {
 val libs: (String) -> String by rootProject.ext
 val oss: List<OpenSourceLibrary> by rootProject.ext
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     kotlinOptions.jvmTarget = "11"
 }
 

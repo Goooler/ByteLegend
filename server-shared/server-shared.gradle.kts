@@ -23,7 +23,7 @@ subprojects {
     }
 
     // Must be here, otherwise it won't be configured because of different classloaders
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions.jvmTarget = "11"
     }
 }
