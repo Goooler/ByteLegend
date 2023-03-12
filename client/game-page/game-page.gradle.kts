@@ -33,7 +33,7 @@ dependencies {
 }
 
 kotlin {
-    js {
+    js(IR) {
         browser {
             testTask {
                 useKarma {

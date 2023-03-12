@@ -24,7 +24,7 @@ val libs: (String) -> String by rootProject.ext
 val libVersions: (String) -> String by rootProject.ext
 
 kotlin {
-    js {
+    js(IR) {
         browser {
             testTask {
                 useKarma {
